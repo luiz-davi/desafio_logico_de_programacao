@@ -1,31 +1,20 @@
-def possivelRemover?(expressao)
-    count = 0
-    while count < expressao.length
-        if expressao[count] == "<" && expressao[count + 1] == ">"
-            return true
-        end
-        count += 1
-    end 
-    false
-end
-
 expressao = "<<.<<..>><>><.>.>.<<.>.<.>>>><>><>>"
 areai = expressao.count(".")
 expressao = expressao.delete(".")
+puts expressao
 expressao = expressao.chars
 
 diamantes = 0
-count = 0
-while possivelRemover?(expressao)
-    while count < expressao.length - 1
-        if expressao[count] == "<" && expressao[count + 1] == ">"
-            expressao.delete_at(count)
-            expressao.delete_at(count + 1)
-            diamantes += 1
-        end
-        count += 1
+menor = 0
+j= 0
+while j < expressao.length
+    if expressao[j] == "<"
+        menor += 1
+    elsif expressao[j] == ">" and menor > 0 
+        diamantes += 1
+        menor -= 1
     end
-    count = 0
+    j+=1
 end
 
 puts "Há #{areai} grão(s) de areai na espressão"
